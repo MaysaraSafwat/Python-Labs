@@ -1,0 +1,59 @@
+<style>
+    .btn {
+        padding: 2% 3%;
+        border: none;
+        border-radius: 10px;
+        text-decoration: none;
+        color: white;
+        margin: 1%;
+
+    }
+    .btn-info {
+        background-color: green;
+    }
+    .btn-danger {
+        background-color: red;
+    }
+    thead{
+        background-color: lightgray;
+    }
+    td{
+        margin: 2%;
+    }
+</style>
+{% block main-content %}
+<table class="table table-condensed">
+ <thead>
+    <tr>
+        <td> ID </td>
+        <td> Name </td>
+        <td> Author </td>
+        <td> Description </td>
+        <td> Actions </td>
+    </tr>
+ </thead>
+ 
+ <tbody>
+    {% for book in books_list%}
+   <tr>
+    <td> {{ book.id }} </td>
+    <td> {{ book.name }} </td>
+    <td> {{ book.author }} </td>
+    <td> {{ book.description | truncatewords:2  | title }} </td>
+    
+    <td style="width: 30vw"> 
+        <a class="btn btn-info" href="{% url 'book-details' book.id %}"> View</a>
+        <a class="btn btn-info" href="{% url 'book-update' book.id %}"> Update</a>
+        <a class="btn btn-danger" href=""> Delete</a>
+    </td>
+   </tr>
+
+   {% empty %}
+   <tr>
+    <td colspan="3" class="text-center"> sorry, not task in list</td>
+   </tr>
+{% endfor %}
+ </tbody>
+
+</table>
+{% endblock %}
